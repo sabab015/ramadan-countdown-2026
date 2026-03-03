@@ -1,0 +1,175 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="ramadan-widget-wrapper">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
+
+        .ramadan-bn-font {
+            font-family: 'Noto Serif Bengali', serif;
+        }
+
+        /* live pulse */
+        .ramadan-live-dot {
+            animation: ramadanPulse 1.5s infinite;
+        }
+
+        @keyframes ramadanPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: .4;
+                transform: scale(.8);
+            }
+        }
+    </style>
+
+    <!-- MAIN CARD -->
+    <div class="ramadan-bn-font
+              w-[300px] h-[100px]
+              md:w-[590px] md:h-[70px]
+              flex rounded-xl overflow-hidden shadow-lg
+              bg-gradient-to-br from-gray-100 via-white to-gray-100
+              text-slate-900 border border-gray-200">
+
+        <!-- LOGO -->
+        <a href="https://bonikbarta.com/iftar-and-sehri-time" class="w-[110px] md:w-[250px] h-full
+              flex items-center justify-center
+              bg-[rgb(231,242,244)] hover:bg-gray-50 transition">
+            <img src="https://static.bonikbarta.com/images/raja_metal_update.original.jpg"
+                class="max-h-[70px] object-contain" alt="Bonik Barta" />
+        </a>
+
+        <!-- DIVIDER -->
+        <div class="w-px bg-gray-200"></div>
+
+        <!-- CONTENT -->
+        <div class="flex-1 px-2 md:px-3 py-1 flex flex-col justify-center
+            relative overflow-hidden
+            bg-cover bg-center bg-no-repeat"
+            style="background-image:url('https://static.bonikbarta.com/images/RAMADAN-SEHRI-IFTAR_fff.jpg.original.jpg');">
+
+            <!-- LABEL + LIVE -->
+            <div class="flex items-center justify-center gap-2 mb-1">
+
+                <span class="ramadan-live-dot w-2 h-2 rounded-full bg-red-500"></span>
+
+                <div id="ramadan-label"
+                    class="text-[12px] md:text-[13px] font-semibold text-center text-white leading-tight">
+                    লোড হচ্ছে...
+                </div>
+            </div>
+
+            <!-- COUNTDOWN -->
+            <div class="flex justify-center items-center gap-2 md:gap-3 w-full">
+
+                <!-- HOURS -->
+                <div class="flex flex-col items-center">
+                    <div id="ramadan-hours" class="w-9 h-8 md:h-7 flex items-center justify-center
+                      rounded-md bg-slate-100 text-slate-800
+                      font-bold text-sm shadow-sm">
+                        ০০
+                    </div>
+                    <span class="text-[10px] mt-[2px] text-white">ঘন্টা</span>
+                </div>
+
+                <!-- MINUTES -->
+                <div class="flex flex-col items-center">
+                    <div id="ramadan-minutes" class="w-9 h-8 md:h-7 flex items-center justify-center
+                      rounded-md bg-slate-100 text-slate-800
+                      font-bold text-sm shadow-sm">
+                        ০০
+                    </div>
+                    <span class="text-[10px] mt-[2px] text-white">মিনিট</span>
+                </div>
+
+                <!-- SECONDS -->
+                <div class="flex flex-col items-center">
+                    <div id="ramadan-seconds" class="w-9 h-8 md:h-7 flex items-center justify-center
+                      rounded-md bg-slate-100 text-slate-800
+                      font-bold text-sm shadow-sm">
+                        ০০
+                    </div>
+                    <span class="text-[10px] mt-[2px] text-white">সেকেন্ড</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+
+        const timings = [
+            { date: '2026-02-19', sehri: '05:12 AM', iftar: '05:58 PM' },
+            { date: '2026-02-20', sehri: '05:11 AM', iftar: '05:58 PM' },
+            { date: '2026-02-21', sehri: '05:11 AM', iftar: '05:59 PM' },
+            { date: '2026-02-22', sehri: '05:10 AM', iftar: '05:59 PM' },
+            { date: '2026-02-23', sehri: '05:09 AM', iftar: '06:00 PM' },
+            { date: '2026-02-24', sehri: '05:08 AM', iftar: '06:00 PM' },
+            { date: '2026-02-25', sehri: '05:08 AM', iftar: '06:01 PM' },
+            { date: '2026-02-26', sehri: '05:07 AM', iftar: '06:01 PM' },
+            { date: '2026-02-27', sehri: '05:06 AM', iftar: '06:02 PM' },
+            { date: '2026-02-28', sehri: '05:05 AM', iftar: '06:02 PM' },
+            { date: '2026-03-01', sehri: '05:05 AM', iftar: '06:02 PM' },
+            { date: '2026-03-02', sehri: '05:04 AM', iftar: '06:03 PM' },
+            { date: '2026-03-03', sehri: '05:03 AM', iftar: '06:03 PM' },
+            { date: '2026-03-04', sehri: '05:02 AM', iftar: '06:04 PM' },
+            { date: '2026-03-05', sehri: '05:01 AM', iftar: '06:04 PM' },
+            { date: '2026-03-06', sehri: '05:00 AM', iftar: '06:05 PM' },
+            { date: '2026-03-07', sehri: '04:59 AM', iftar: '06:05 PM' },
+            { date: '2026-03-08', sehri: '04:58 AM', iftar: '06:06 PM' },
+            { date: '2026-03-09', sehri: '04:57 AM', iftar: '06:07 PM' },
+            { date: '2026-03-10', sehri: '04:57 AM', iftar: '06:07 PM' },
+            { date: '2026-03-11', sehri: '04:56 AM', iftar: '06:07 PM' },
+            { date: '2026-03-12', sehri: '04:55 AM', iftar: '06:08 PM' },
+            { date: '2026-03-13', sehri: '04:54 AM', iftar: '06:08 PM' },
+            { date: '2026-03-14', sehri: '04:53 AM', iftar: '06:09 PM' },
+            { date: '2026-03-15', sehri: '04:52 AM', iftar: '06:09 PM' },
+            { date: '2026-03-16', sehri: '04:51 AM', iftar: '06:10 PM' },
+            { date: '2026-03-17', sehri: '04:50 AM', iftar: '06:10 PM' },
+            { date: '2026-03-18', sehri: '04:49 AM', iftar: '06:10 PM' },
+            { date: '2026-03-19', sehri: '04:48 AM', iftar: '06:11 PM' },
+            { date: '2026-03-20', sehri: '04:47 AM', iftar: '06:11 PM' }
+        ];
+
+        const digits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        const toBn = n => n.toString().padStart(2, '0').split('').map(d => digits[d]).join('');
+
+        const toBnTime = t => {
+            const [h, m, p] = t.match(/(\d+):(\d+) (AM|PM)/).slice(1);
+            return `${p === 'AM' ? 'ভোর' : 'সন্ধ্যা'} ${toBn(h)}:${toBn(m)}`;
+        };
+
+        function getNext() {
+            const now = new Date();
+            for (const t of timings) {
+                const s = new Date(`${t.date} ${t.sehri}`);
+                const i = new Date(`${t.date} ${t.iftar}`);
+                if (now < s) return { label: `সেহরির শেষ - ${toBnTime(t.sehri)}`, target: s };
+                if (now < i) return { label: `ইফতার - ${toBnTime(t.iftar)}`, target: i };
+            }
+            return null;
+        }
+
+        function update() {
+            const e = getNext();
+            if (!e) return;
+
+            document.getElementById('ramadan-label').textContent = e.label;
+
+            const d = e.target - new Date();
+            document.getElementById('ramadan-hours').textContent = toBn(Math.floor(d / 36e5) % 24);
+            document.getElementById('ramadan-minutes').textContent = toBn(Math.floor(d / 6e4) % 60);
+            document.getElementById('ramadan-seconds').textContent = toBn(Math.floor(d / 1000) % 60);
+        }
+
+        update();
+        setInterval(update, 1000);
+
+    })();
+</script>
