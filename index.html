@@ -1,14 +1,101 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<div class="ramadan-widget-wrapper">
+<div class="ramadan-widget">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
 
-        .ramadan-bn-font {
+        .ramadan-widget {
             font-family: 'Noto Serif Bengali', serif;
+            width: 300px;
+            height: 100px;
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(to bottom right, #f3f4f6, #ffffff);
+            border: 1px solid #e5e7eb;
         }
 
-        /* live pulse */
+        /* Desktop */
+        @media (min-width: 768px) {
+            .ramadan-widget {
+                width: 590px;
+                height: 70px;
+            }
+        }
+
+        /* Left Ad Section */
+        .ramadan-ad {
+            width: 110px;
+            height: 100%;
+            background: rgb(231, 242, 244);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .ramadan-ad {
+                width: 250px;
+            }
+        }
+
+        .ramadan-ad img {
+            max-height: 70px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Divider */
+        .ramadan-divider {
+            width: 1px;
+            background: #e5e7eb;
+        }
+
+        /* Countdown Section */
+        .ramadan-content {
+            flex: 1;
+            padding: 6px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-image: url('https://static.bonikbarta.com/images/RAMADAN-SEHRI-IFTAR_fff.jpg.original.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #ffffff;
+        }
+
+        /* overlay for readability */
+        .ramadan-content::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+        }
+
+        .ramadan-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* Label */
+        .ramadan-label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Live Dot */
         .ramadan-live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
             animation: ramadanPulse 1.5s infinite;
         }
 
@@ -21,82 +108,84 @@
             }
 
             50% {
-                opacity: .4;
-                transform: scale(.8);
+                opacity: 0.4;
+                transform: scale(0.8);
             }
+        }
+
+        /* Countdown Row */
+        .ramadan-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .ramadan-box-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ramadan-box {
+            width: 36px;
+            height: 32px;
+            background: #f1f5f9;
+            color: #1e293b;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .ramadan-box {
+                height: 28px;
+            }
+        }
+
+        .ramadan-unit {
+            font-size: 10px;
+            margin-top: 3px;
         }
     </style>
 
-    <!-- MAIN CARD -->
-    <div class="ramadan-bn-font
-              w-[300px] h-[100px]
-              md:w-[590px] md:h-[70px]
-              flex rounded-xl overflow-hidden shadow-lg
-              bg-gradient-to-br from-gray-100 via-white to-gray-100
-              text-slate-900 border border-gray-200">
+    <!-- Ad Section -->
+    <a href="https://bonikbarta.com/iftar-and-sehri-time" class="ramadan-ad">
+        <img src="https://static.bonikbarta.com/images/raja_metal_update.original.jpg" alt="Advertisement">
+    </a>
 
-        <!-- LOGO -->
-        <a href="https://bonikbarta.com/iftar-and-sehri-time" class="w-[110px] md:w-[250px] h-full
-              flex items-center justify-center
-              bg-[rgb(231,242,244)] hover:bg-gray-50 transition">
-            <img src="https://static.bonikbarta.com/images/raja_metal_update.original.jpg"
-                class="max-h-[70px] object-contain" alt="Bonik Barta" />
-        </a>
+    <div class="ramadan-divider"></div>
 
-        <!-- DIVIDER -->
-        <div class="w-px bg-gray-200"></div>
+    <!-- Countdown Section -->
+    <div class="ramadan-content">
+        <div class="ramadan-inner">
 
-        <!-- CONTENT -->
-        <div class="flex-1 px-2 md:px-3 py-1 flex flex-col justify-center
-            relative overflow-hidden
-            bg-cover bg-center bg-no-repeat"
-            style="background-image:url('https://static.bonikbarta.com/images/RAMADAN-SEHRI-IFTAR_fff.jpg.original.jpg');">
-
-            <!-- LABEL + LIVE -->
-            <div class="flex items-center justify-center gap-2 mb-1">
-
-                <span class="ramadan-live-dot w-2 h-2 rounded-full bg-red-500"></span>
-
-                <div id="ramadan-label"
-                    class="text-[12px] md:text-[13px] font-semibold text-center text-white leading-tight">
-                    লোড হচ্ছে...
-                </div>
+            <div class="ramadan-label">
+                <span class="ramadan-live-dot"></span>
+                <span id="ramadan-label">লোড হচ্ছে...</span>
             </div>
 
-            <!-- COUNTDOWN -->
-            <div class="flex justify-center items-center gap-2 md:gap-3 w-full">
+            <div class="ramadan-countdown">
 
-                <!-- HOURS -->
-                <div class="flex flex-col items-center">
-                    <div id="ramadan-hours" class="w-9 h-8 md:h-7 flex items-center justify-center
-                      rounded-md bg-slate-100 text-slate-800
-                      font-bold text-sm shadow-sm">
-                        ০০
-                    </div>
-                    <span class="text-[10px] mt-[2px] text-white">ঘন্টা</span>
+                <div class="ramadan-box-container">
+                    <div class="ramadan-box" id="ramadan-hours">০০</div>
+                    <div class="ramadan-unit">ঘন্টা</div>
                 </div>
 
-                <!-- MINUTES -->
-                <div class="flex flex-col items-center">
-                    <div id="ramadan-minutes" class="w-9 h-8 md:h-7 flex items-center justify-center
-                      rounded-md bg-slate-100 text-slate-800
-                      font-bold text-sm shadow-sm">
-                        ০০
-                    </div>
-                    <span class="text-[10px] mt-[2px] text-white">মিনিট</span>
+                <div class="ramadan-box-container">
+                    <div class="ramadan-box" id="ramadan-minutes">০০</div>
+                    <div class="ramadan-unit">মিনিট</div>
                 </div>
 
-                <!-- SECONDS -->
-                <div class="flex flex-col items-center">
-                    <div id="ramadan-seconds" class="w-9 h-8 md:h-7 flex items-center justify-center
-                      rounded-md bg-slate-100 text-slate-800
-                      font-bold text-sm shadow-sm">
-                        ০০
-                    </div>
-                    <span class="text-[10px] mt-[2px] text-white">সেকেন্ড</span>
+                <div class="ramadan-box-container">
+                    <div class="ramadan-box" id="ramadan-seconds">০০</div>
+                    <div class="ramadan-unit">সেকেন্ড</div>
                 </div>
 
             </div>
+
         </div>
     </div>
 </div>
